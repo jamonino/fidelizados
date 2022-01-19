@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 
 @JsonInclude(Include.NON_NULL)
 public class Business {
@@ -108,6 +109,25 @@ public class Business {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public void insert_DB(Db myDb) throws SQLException, Exception {
+                PreparedStatement ps = myDb.prepareStatement(
+                    "INSERT INTO business (name,vat,address,phone,ratio_euro_point,login_id) VALUES (?,?,?,?,?,?) RETURNING id;"
+            );
+        ps.setString(1, this.getName());
+        ps.setString(2, this.getVat());
+        ps.setString(3, this.getAddress());
+        ps.setString(4, this.getPhone());
+        ps.setInt(5, this.getRatio_euro_point());
+        ps.setInt(6, this.getLogin().getId());
+        
+        ResultSet rs = myDb.executeQuery(ps);
+        if(rs.next()){
+            this.setId(rs.getInt("id"));
+        }else{
+            throw new Exception();
+        }
     }
     
     

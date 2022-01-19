@@ -79,7 +79,20 @@ public class Login {
     public void setExptirationCode(Date exptirationCode) {
         this.exptirationCode = exptirationCode;
     }
-    
-    
+
+    public void insert_DB(Db myDb) throws SQLException, Exception {
+        PreparedStatement ps = myDb.prepareStatement(
+                    "INSERT INTO logins (email,pass) VALUES (?,?) RETURNING id;"
+            );
+        ps.setString(1, this.getEmail());
+        ps.setString(2, this.getPass());
+        
+        ResultSet rs = myDb.executeQuery(ps);
+        if(rs.next()){
+            this.setId(rs.getInt("id"));
+        }else{
+            throw new Exception();
+        }
+    }
     
 }

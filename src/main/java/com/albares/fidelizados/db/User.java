@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.Date;
 
 @JsonInclude(Include.NON_NULL)
@@ -16,7 +17,7 @@ public class User {
     private Integer gender;
     private String code;
     private Login login;
-    private Date birthDate;
+    private Long birthDate;
     
     
     //Fuera de BBDD
@@ -87,12 +88,31 @@ public class User {
         this.login = login;
     }
 
-    public Date getBirthDate() {
+    public Long getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(Long birthDate) {
         this.birthDate = birthDate;
+    }
+
+
+
+    public void insert_DB(Db myDb) throws SQLException, Exception {
+        PreparedStatement ps = myDb.prepareStatement(
+                    "INSERT INTO users (name,birth_date,gender,login_id) VALUES (?,?,?,?) RETURNING id;"
+            );
+        ps.setString(1, this.getName());
+        ps.setTimestamp(2, new Timestamp(this.getBirthDate()));
+        ps.setInt(3, this.getGender());
+        ps.setInt(4, this.getLogin().getId());
+        
+        ResultSet rs = myDb.executeQuery(ps);
+        if(rs.next()){
+            this.setId(rs.getInt("id"));
+        }else{
+            throw new Exception();
+        }
     }
     
     
