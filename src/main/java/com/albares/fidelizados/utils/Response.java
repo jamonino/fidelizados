@@ -1,6 +1,9 @@
 
 package com.albares.fidelizados.utils;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Response {
     private Integer responseCode;
     

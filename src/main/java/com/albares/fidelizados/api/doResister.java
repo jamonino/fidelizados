@@ -18,7 +18,7 @@ import jakarta.ws.rs.core.MediaType;
 import java.sql.SQLException;
 
 @Path("/doLogin")
-public class doLogin {
+public class doResister {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
