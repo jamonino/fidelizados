@@ -34,7 +34,9 @@ public class doLogin {
             if(login.checkEmailAndGetIdPass(myDb)){
                 if(login.checkPass(pass)){
                     user.getIdAndNamebyLogin(myDb);
+                    user.setLogin(null);
                     user.setToken(JWTUtils.generateToken(user.getId(), login.getId()));
+                    return new Response(ResponseCodes.OK, new GenericData(user));
                 }else{
                     myDb.disconnect();
                     return new Response(ResponseCodes.ERROR); 
@@ -42,12 +44,6 @@ public class doLogin {
             }else{
                 myDb.disconnect();
                 return new Response(ResponseCodes.NO_USER); 
-                /*
-                login.insertLogin(myDb);
-                User user = new User();
-                user.setLogin(login);
-                user.
-                */
             }
         }else if (gd.getBusiness()!=null){ // Se está haciendo login en la app business
         

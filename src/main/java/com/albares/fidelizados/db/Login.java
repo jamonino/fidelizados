@@ -2,13 +2,14 @@
 package com.albares.fidelizados.db;
 
 import com.albares.fidelizados.utils.Db;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
+@JsonInclude(Include.NON_NULL)
 public class Login {
     private Integer id;
     private String email;
@@ -23,7 +24,7 @@ public class Login {
         PreparedStatement ps = myDb.prepareStatement(
                     "SELECT id,pass FROM logins WHERE  email = ?;"
             );
-        ps.setInt(1, this.getId());
+        ps.setString(1, this.getEmail());
         ResultSet rs = myDb.executeQuery(ps);
         if(rs.next()){
             this.setId(rs.getInt("id"));

@@ -1,11 +1,14 @@
 package com.albares.fidelizados.db;
 
 import com.albares.fidelizados.utils.Db;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 
+@JsonInclude(Include.NON_NULL)
 public class User {
     
     private Integer id;
@@ -14,13 +17,18 @@ public class User {
     private String code;
     private Login login;
     private Date birthDate;
+    
+    
+    //Fuera de BBDD
+    String token;
+    
 
     public User() {
     }
 
     public void getIdAndNamebyLogin(Db myDb) throws SQLException{
         PreparedStatement ps = myDb.prepareStatement(
-                    "SELECT id,name FROM users WHERE  loginId = ?;"
+                    "SELECT id,name FROM users WHERE  login_id = ?;"
             );
         ps.setInt(1, this.getLogin().getId());
         
@@ -53,6 +61,14 @@ public class User {
 
     public void setGender(Integer gender) {
         this.gender = gender;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public String getCode() {

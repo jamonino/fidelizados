@@ -1,9 +1,12 @@
 
 package com.albares.fidelizados.db;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import java.util.ArrayList;
 import java.util.Date;
 
+@JsonInclude(Include.NON_NULL)
 public class Bill {
     private Integer id;
     private Integer price;

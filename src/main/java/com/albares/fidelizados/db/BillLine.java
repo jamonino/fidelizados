@@ -1,6 +1,10 @@
 
 package com.albares.fidelizados.db;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+@JsonInclude(Include.NON_NULL)
 public class BillLine {
     private Integer id;
     private Bill bill;

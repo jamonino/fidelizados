@@ -12,4 +12,11 @@ public final class Parameters {
     public static final String DB_URL = "jdbc:postgresql://localhost:5432/fidelizados_db";
     public static final String DB_USER = "fidelizados_user";
     public static final String DB_PASS = Secrets.DB_PASS;
+    
+    
+    
+    
+    
+    
+    
 }

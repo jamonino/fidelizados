@@ -1,7 +1,10 @@
 
 package com.albares.fidelizados.db;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
+@JsonInclude(Include.NON_NULL)
 public class Wallet {
     private Integer id;
     private Integer points;
