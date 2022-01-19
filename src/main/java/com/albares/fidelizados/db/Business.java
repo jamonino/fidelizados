@@ -1,8 +1,12 @@
 
 package com.albares.fidelizados.db;
 
+import com.albares.fidelizados.utils.Db;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 @JsonInclude(Include.NON_NULL)
 public class Business {
@@ -15,9 +19,25 @@ public class Business {
     private Integer freePrizes;
     private Login login;
 
+    //Fuera de BBDD
+    String token;
+    
     public Business() {
     }
 
+    public void getIdAndNamebyLogin(Db myDb) throws SQLException{
+        PreparedStatement ps = myDb.prepareStatement(
+                    "SELECT id,name FROM business WHERE  login_id = ?;"
+            );
+        ps.setInt(1, this.getLogin().getId());
+        
+        ResultSet rs = myDb.executeQuery(ps);
+        if(rs.next()){
+            this.setId(rs.getInt("id"));
+            this.setName(rs.getString("name"));
+        }
+    }
+    
     public Integer getId() {
         return id;
     }
@@ -80,6 +100,14 @@ public class Business {
 
     public void setLogin(Login login) {
         this.login = login;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
     
     

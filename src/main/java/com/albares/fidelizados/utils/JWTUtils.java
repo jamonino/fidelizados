@@ -16,9 +16,11 @@ public final class JWTUtils {
     public JWTUtils() {
     }
     
-    public static final String generateToken(int id, int loginId){
+    public static final String generateToken(int id, int loginId, int app){
         String token = JWT.create()
                 .withIssuer(Parameters.PROJECT_NAME)
+                .withIssuer(Parameters.PROJECT_NAME)
+                .withClaim("app", app)
                 .withClaim("id", id)
                 .withClaim("loginId", loginId)
                 .withIssuedAt(new Date())

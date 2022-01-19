@@ -20,6 +20,10 @@ public class GenericData {
         this.user = user;
     }
 
+    public GenericData(Business business) {
+        this.business = business;
+    }
+    
     public User getUser() {
         return user;
     }

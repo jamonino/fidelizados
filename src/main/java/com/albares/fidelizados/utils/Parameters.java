@@ -13,6 +13,10 @@ public final class Parameters {
     public static final String DB_USER = "fidelizados_user";
     public static final String DB_PASS = Secrets.DB_PASS;
     
+    public static final int APP_USER = 0;
+    public static final int APP_BUSINESS = 1;
+    
+    
     
     
     
