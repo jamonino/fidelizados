@@ -15,13 +15,55 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import java.sql.SQLException;
+/*
+REQUEST:
+    {
+	"business":{
+		"name":"Pizzeria Manoli",
+		"address":"Calle alegría",
+		"phone":"12345",
+		"vat":"B234324324",
+		"ratio_euro_point":2,
+	    "login": {
+	    	"email":"pizzeria@manoli.com",
+	    	"pass":"1234"
+	    }
+    }
+
+    {
+	"user":{
+		"name":"juan",
+		"birthDate":1642598738000,
+		"gender":1,
+	    "login": {
+	    	"email":"juanito@blablabla.com",
+	    	"pass":"1234"
+	    }
+        }
+    }
+
+    RESPONSE:
+    {
+        "responseCode": 1,
+        "genericData": {
+            "business": { // "user"
+                "name": "Carniceria Pedrito",
+                "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhcHAiOjEsImxvZ2luSWQiOjMsImlzcyI6IkZpZGVsaXphZG9zIiwiaWQiOjIsImlhdCI6MTY0MjY3NTU5N30.2hqw7PCs1jIGu3qDQH_L0OqPgIK06lto2bSBQKLOOzg"
+            }
+        }
+    }
+
+
+}
+*/
+
 
 @Path("/doRegister")
 public class doRegister {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response doLogin(GenericData gd) throws SQLException, Exception{
+    public Response doRegister(GenericData gd) throws SQLException, Exception{
         
         Db myDb = new Db();
         myDb.connect();

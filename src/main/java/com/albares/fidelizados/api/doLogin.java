@@ -16,7 +16,23 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import java.sql.SQLException;
+/*
+REQUEST:
+{
+    "login":{
+        "email":"aasdasddsa",
+        "pass":"2123132"
+    },
+    "user":{} //"business":{}
+}
+RESPONSE:
+{
+    "responseCode":-1 //Mal la pass
+                    0 //No existe login con ese email
+                    1 //Existe email y coincide la pass
+}
 
+*/
 @Path("/doLogin")
 public class doLogin {
     @POST
