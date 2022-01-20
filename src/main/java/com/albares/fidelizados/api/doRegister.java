@@ -2,7 +2,6 @@
 package com.albares.fidelizados.api;
 
 import com.albares.fidelizados.db.Business;
-import com.albares.fidelizados.db.Login;
 import com.albares.fidelizados.db.User;
 import com.albares.fidelizados.utils.Db;
 import com.albares.fidelizados.utils.GenericData;
