@@ -12,6 +12,7 @@ public class GenericData {
     private Login login;
     private User user;
     private Business business;
+    private Image image;
 
     public GenericData() {
     }
@@ -22,6 +23,10 @@ public class GenericData {
 
     public GenericData(Business business) {
         this.business = business;
+    }
+
+    public GenericData(Image image) {
+        this.image = image;
     }
     
     public User getUser() {
@@ -46,6 +51,14 @@ public class GenericData {
 
     public void setBusiness(Business business) {
         this.business = business;
+    }
+
+    public Image getImage() {
+        return image;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
     }
     
     

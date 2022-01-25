@@ -16,6 +16,13 @@ public final class Parameters {
     public static final int APP_USER = 0;
     public static final int APP_BUSINESS = 1;
     
+    //public static final String BASEPATH = "/opt/tomcat/webapps/images/";
+    public static final String BASE_PATH = "C:/Users/josem/Documents/NetBeansProjects/Fidelizados/target/fidelizados/";
+    public static final String RELATIVE_PATH = "images/";
+    public static final String SERVER_URL = "http://localhost:8080/fidelizados/";
+    
+    
+    
     
     
     

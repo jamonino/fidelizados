@@ -1,10 +1,65 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Start Page</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-    </body>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>HTML</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="estilo.css">
+</head>
+
+<body>
+  <div>
+    <div>
+	<input type="file" id="filePicker">	
+    </div>
+      <br>
+    <div>
+        <textarea id="responsearea" placeholder="Respuesta..." cols="50" rows="15"></textarea>
+    </div>
+</div>
+</body>
+<script>
+var handleFileSelect = function(evt) {
+    var files = evt.target.files;
+    var file = files[0];
+
+    if (files && file) {
+        var reader = new FileReader();
+
+        reader.onload = function(readerEvt) {
+            var binaryString = readerEvt.target.result;
+			
+			var myHeaders = new Headers();
+			myHeaders.append("Content-Type", "application/octet-stream");
+
+			var requestOptions = {
+			  method: 'POST',
+			  headers: myHeaders,
+			  body: file,
+			  redirect: 'follow'
+			};
+
+			fetch("http://localhost:8080/fidelizados/api/addImage/", requestOptions)
+			  .then((response) => response.json())
+			  .then(function(data) {
+                                document.getElementById("responsearea").value = JSON.stringify(data, null, 2);
+                              }
+                            )
+			  .catch(error => console.log('error', error));
+            
+        };
+
+        reader.readAsBinaryString(file);
+    }
+};
+
+if (window.File && window.FileReader && window.FileList && window.Blob) {
+    document.getElementById('filePicker').addEventListener('change', handleFileSelect, false);
+} else {
+    alert('The File APIs are not fully supported in this browser.');
+}
+</script>
+
 </html>
+
+
